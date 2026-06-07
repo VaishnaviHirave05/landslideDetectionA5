@@ -1,0 +1,19 @@
+landslide instance name: qx087
+landslide instance polygon boundary coordinates(x,y):
+97 103
+104 82
+113 79
+124 83
+133 86
+152 101
+161 117
+157 128
+151 134
+144 140
+127 154
+110 161
+93 154
+82 139
+79 124
+82 118
+97 103

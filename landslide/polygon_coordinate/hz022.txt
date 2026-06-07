@@ -1,0 +1,23 @@
+landslide instance name: hz022
+landslide instance polygon boundary coordinates(x,y):
+67 62
+96 88
+109 97
+112 97
+120 96
+125 97
+128 105
+129 111
+128 123
+127 131
+123 136
+121 138
+105 130
+97 122
+83 98
+59 72
+53 65
+49 53
+49 52
+54 49
+67 62

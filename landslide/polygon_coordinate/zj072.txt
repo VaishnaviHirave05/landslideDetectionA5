@@ -1,0 +1,22 @@
+landslide instance name: zj072
+landslide instance polygon boundary coordinates(x,y):
+203 263
+132 213
+83 155
+79 122
+88 98
+110 83
+148 79
+178 79
+204 89
+206 109
+205 129
+220 140
+258 158
+303 182
+322 196
+312 208
+287 226
+261 245
+234 258
+203 263

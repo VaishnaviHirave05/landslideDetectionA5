@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | LandslideGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===============================
+   VARIABLES
+================================ */
+:root {
+    --primary: #6a5cff;
+    --secondary: #22d3ee;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-main: #ffffff;
+    --text-secondary: rgba(255,255,255,0.7);
+    --danger: #ef4444;
+    --success: #10b981;
+}
+
+/* ===============================
+   PAGE BASE
+================================ */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", system-ui, sans-serif;
+    background: #020617;
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* ===============================
+   BLUR BACKGROUND SLIDER
+================================ */
+.bg-slider {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+}
+
+.bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(80px);
+    transform: scale(1.2);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.bg-slide.active {
+    opacity: 0.6;
+}
+
+/* Dark overlay for readability */
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        rgba(2,6,23,0.65),
+        rgba(2,6,23,0.85)
+    );
+    z-index: -1;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255,255,255,0.08);
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+/* ===============================
+   GLASS CARD
+================================ */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    margin-bottom: 2rem;
+}
+
+/* ===============================
+   STATS GRID
+================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table thead {
+    background: rgba(255,255,255,0.12);
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.history-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.history-table tbody tr:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+/* ===============================
+   BADGES
+================================ */
+.status-badge {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.status-danger {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.status-success {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 40px;
+    padding: 0.5rem 2rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .stat-value {
+        font-size: 2rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===============================
+     BLUR BACKGROUND SLIDES
+================================ -->
+<div class="bg-slider">
+    <div class="bg-slide active"
+         style="background-image:url('https://tse2.mm.bing.net/th/id/OIP.0siN6w8p1tQgmlhQg3USWQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3');"></div>
+
+    <div class="bg-slide"
+         style="background-image:url('https://media.istockphoto.com/id/186876633/photo/rock-slide-with-damage-on-the-road-during-a-storm.jpg?s=612x612&w=0&k=20&c=_ZMhXeW0hKxEIZI9WBA1WhduYWGUkeSXZd68LJRwPII=');"></div>
+
+    <div class="bg-slide"
+         style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Landslide_in_Uttarakhand_India.jpg');"></div>
+</div>
+
+<div class="bg-overlay"></div>
+
+<!-- ===============================
+     NAVBAR
+================================ -->
+<nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-brand">
+        <span>⛰️</span> LandslideGuard
+    </a>
+    <ul class="nav-menu">
+        <li><a href="{{ url_for('analysis') }}" class="nav-link">New Analysis</a></li>
+        <li><a href="{{ url_for('history') }}" class="nav-link">History</a></li>
+        <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- ===============================
+     DASHBOARD CONTENT
+================================ -->
+<div class="container">
+
+    <h2>Dashboard Overview</h2>
+    <p style="color:var(--text-secondary);">Welcome back, {{ session.username }}!</p>
+
+    <div class="stats-grid">
+        <div class="glass-card stat-card">
+            <h3>Total Scans</h3>
+            <div class="stat-value">{{ total_scans }}</div>
+        </div>
+
+        <div class="glass-card stat-card">
+            <h3 style="color:#ef4444;">Landslides Detected</h3>
+            <div class="stat-value" style="color:#ef4444;">{{ danger_count }}</div>
+        </div>
+
+        <div class="glass-card stat-card">
+            <h3 style="color:#10b981;">Safe Areas</h3>
+            <div class="stat-value" style="color:#10b981;">{{ safe_count }}</div>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h3>Recent Activity</h3>
+
+        {% if recent_history %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Result</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in recent_history %}
+                <tr>
+                    <td>{{ item.prediction_date }}</td>
+                    <td>
+                        <span class="status-badge {{ 'status-danger' if 'Landslide' in item.result else 'status-success' }}">
+                            {{ item.result }}
+                        </span>
+                    </td>
+                    <td>{{ item.confidence }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="text-align:center; color:var(--text-secondary); padding:2rem;">
+            No recent activity found.
+        </p>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- ===============================
+     BACKGROUND SWITCH SCRIPT
+================================ -->
+<script>
+const slides = document.querySelectorAll(".bg-slide");
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 5000);
+</script>
+
+</body>
+</html>

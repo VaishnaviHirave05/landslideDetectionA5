@@ -1,0 +1,17 @@
+landslide instance name: qx125
+landslide instance polygon boundary coordinates(x,y):
+84 130
+79 120
+83 106
+95 91
+101 88
+129 79
+142 84
+168 98
+182 109
+177 117
+152 139
+128 145
+107 147
+95 135
+84 130

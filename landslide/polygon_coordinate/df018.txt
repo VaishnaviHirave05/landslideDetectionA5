@@ -1,0 +1,21 @@
+landslide instance name: df018
+landslide instance polygon boundary coordinates(x,y):
+189 140
+167 164
+132 163
+106 163
+48 133
+39 114
+45 99
+66 80
+88 73
+112 65
+127 61
+145 47
+183 39
+201 44
+219 62
+229 86
+230 104
+208 123
+189 140

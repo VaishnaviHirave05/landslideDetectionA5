@@ -1,0 +1,2 @@
+0 landslide
+1 nonlandslide

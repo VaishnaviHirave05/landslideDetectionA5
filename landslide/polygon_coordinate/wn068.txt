@@ -1,0 +1,21 @@
+landslide instance name: wn068
+landslide instance polygon boundary coordinates(x,y):
+49 76
+45 76
+42 73
+42 65
+40 47
+39 39
+49 43
+57 47
+70 61
+76 73
+82 86
+90 101
+90 102
+89 112
+82 119
+79 111
+74 97
+67 86
+49 76

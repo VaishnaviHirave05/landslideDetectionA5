@@ -1,0 +1,23 @@
+landslide instance name: qx163
+landslide instance polygon boundary coordinates(x,y):
+123 154
+104 143
+82 105
+80 101
+79 96
+79 92
+81 89
+86 84
+95 79
+99 79
+104 82
+122 95
+142 95
+157 96
+168 101
+169 111
+166 118
+155 130
+141 145
+128 153
+123 154

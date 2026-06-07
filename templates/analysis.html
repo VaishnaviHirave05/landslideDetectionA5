@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Analysis | LandslideGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===============================
+   GLOBAL VARIABLES
+================================ */
+:root {
+    --primary: #6a5cff;
+    --secondary: #22d3ee;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-main: #ffffff;
+    --text-secondary: rgba(255,255,255,0.7);
+    --danger: #ff4d4d;
+    --success: #22c55e;
+}
+
+/* ===============================
+   PAGE BASE
+================================ */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", system-ui, sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* ===============================
+   BLUR BACKGROUND
+================================ */
+.bg-blur::before,
+.bg-blur::after {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(100px);
+    opacity: 0.45;
+    z-index: -1;
+}
+
+.bg-blur::before {
+    background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+    top: -200px;
+    left: -200px;
+}
+
+.bg-blur::after {
+    background-image: url("https://images.unsplash.com/photo-1581092334904-5b8e7c6a5c39");
+    bottom: -200px;
+    right: -200px;
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* ===============================
+   GLASS CARD
+================================ */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.nav-btn {
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    padding: 0.6rem 2rem;
+}
+
+/* ===============================
+   UPLOAD ZONE
+================================ */
+.upload-zone {
+    border: 2px dashed rgba(255,255,255,0.35);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-zone:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--secondary);
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255,255,255,0.08);
+}
+
+/* ===============================
+   FORMS
+================================ */
+.form-control {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.25);
+    color: white;
+}
+
+/* ===============================
+   RESULT
+================================ */
+.status-badge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+.status-danger { background: var(--danger); }
+.status-success { background: var(--success); }
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.image-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.image-box img {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+}
+
+.image-box:hover img {
+    transform: scale(1.05);
+}
+
+.image-main-wrap {
+    background: rgba(0,0,0,0.25);
+    padding: 1rem;
+    border-radius: 16px;
+    display: inline-block;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 600px) {
+    h2 { font-size: 1.6rem; }
+    .glass-card { padding: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-brand">
+        <span>⛰️</span> LandslideGuard
+    </a>
+    <ul class="nav-menu">
+        <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
+        <li><a href="{{ url_for('history') }}" class="nav-link">History</a></li>
+        <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+    </ul>
+</nav>
+<div class="bg-blur"></div>
+
+<div class="container">
+
+<!-- ===============================
+     UPLOAD / URL
+================================ -->
+<div class="glass-card">
+    <h2>New Analysis</h2>
+
+    <div style="display:flex; gap:1rem; justify-content:center; margin:1.5rem 0;">
+        <button class="nav-btn" onclick="showInput('upload')" id="btn-upload">Upload File</button>
+        <button class="nav-btn" onclick="showInput('url')" id="btn-url"
+                style="background:transparent; border:1px solid var(--text-secondary);">
+            Image URL
+        </button>
+    </div>
+
+    <form action="{{ url_for('analysis') }}" method="POST" enctype="multipart/form-data">
+
+        <div id="upload-section">
+            <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+                <input type="file" name="file" id="file-input" hidden accept="image/*"
+                       onchange="this.form.submit()">
+                <div style="font-size:3rem;">📁</div>
+                <h3>Click to Upload Image</h3>
+                <p style="color:var(--text-secondary);">JPG, PNG, TIF supported</p>
+            </div>
+        </div>
+
+        <div id="url-section" style="display:none;">
+            <input type="url" name="image_url" class="form-control"
+                   placeholder="https://example.com/image.jpg">
+            <div style="margin-top:1rem; text-align:center;">
+                <button class="btn-primary">Analyze</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- ===============================
+     RESULT
+================================ -->
+{% if result %}
+<div class="glass-card" style="margin-top:2rem;">
+    <div style="text-align:center;">
+        <span class="status-badge {{ alert_class }}">{{ result }}</span>
+        <p style="color:var(--text-secondary); margin-top:0.5rem;">
+            Confidence: {{ confidence }}
+        </p>
+    </div>
+
+    {% if result == 'Landslide Detected' %}
+    <div class="result-grid">
+        <div class="image-box">
+            <img src="{{ url_for('static', filename=overlay_path) }}">
+            <p>Overlay</p>
+        </div>
+        <div class="image-box">
+            <img src="{{ url_for('static', filename=mask_path) }}">
+            <p>Mask</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="margin-top:2rem; text-align:center;">
+        <p><strong>Original Image</strong></p>
+        <div class="image-main-wrap">
+            <img src="{{ url_for('static', filename=image_path) }}" style="max-width:100%;">
+        </div>
+    </div>
+</div>
+{% endif %}
+
+</div>
+
+<script>
+function showInput(type) {
+    document.getElementById('upload-section').style.display =
+        type === 'upload' ? 'block' : 'none';
+    document.getElementById('url-section').style.display =
+        type === 'url' ? 'block' : 'none';
+}
+</script>
+
+</body>
+</html>

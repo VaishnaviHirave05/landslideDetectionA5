@@ -1,0 +1,27 @@
+landslide instance name: hz053
+landslide instance polygon boundary coordinates(x,y):
+41 49
+42 47
+45 45
+46 43
+48 41
+50 39
+52 39
+54 40
+56 43
+58 45
+60 48
+61 52
+61 55
+61 58
+60 61
+60 63
+56 63
+51 61
+48 59
+44 57
+41 55
+39 53
+39 52
+39 50
+41 49

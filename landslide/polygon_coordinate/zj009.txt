@@ -1,0 +1,16 @@
+landslide instance name: zj009
+landslide instance polygon boundary coordinates(x,y):
+39 55
+52 48
+85 44
+117 40
+135 39
+138 40
+143 63
+143 65
+143 67
+131 70
+85 81
+62 93
+54 94
+39 55

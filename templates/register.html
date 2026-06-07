@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | LandslideGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --primary: #6a5cff;
+    --secondary: #22d3ee;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-main: #ffffff;
+    --text-secondary: rgba(255,255,255,0.7);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", system-ui, sans-serif;
+    color: var(--text-main);
+    background:
+        linear-gradient(rgba(2,6,23,0.75), rgba(2,6,23,0.75)),
+        url("https://assets-cdn.kathmandupost.com/uploads/source/news/2019/environment/Massive%20landslide%20blocked%20Sunkoshi%20River%2001.jpg?sJtY");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.navbar {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.nav-link, .nav-btn {
+    text-decoration: none;
+    color: white;
+}
+
+.form-container {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    padding: 2.5rem;
+}
+
+.glass-card h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.35);
+    color: white;
+}
+
+.form-control::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-brand">⛰️ LandslideGuard</a>
+    <ul class="nav-menu">
+        <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+        <li><a href="{{ url_for('register') }}" class="nav-btn">Get Started</a></li>
+    </ul>
+</nav>
+
+<div class="form-container">
+    <div class="glass-card">
+        <h2>Create Account</h2>
+
+        <form action="{{ url_for('register') }}" method="POST">
+
+            <!-- Username Validation -->
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control"
+                       placeholder="Choose a username"
+                       required
+                       pattern="^[a-zA-Z][a-zA-Z0-9_]{2,14}$"
+                       title="Username must start with a letter, 3–15 characters, only letters, numbers, underscore">
+            </div>
+
+            <!-- Email Validation -->
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-control"
+                       placeholder="name@example.com"
+                       required>
+            </div>
+
+            <!-- Password Validation -->
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control"
+                       placeholder="Create a strong password"
+                       required
+                       pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
+                       title="Minimum 8 characters, must include at least 1 letter and 1 number">
+            </div>
+
+            <button type="submit" class="btn-primary">Register</button>
+        </form>
+
+        <div class="auth-link">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

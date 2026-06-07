@@ -1,0 +1,19 @@
+landslide instance name: hz098
+landslide instance polygon boundary coordinates(x,y):
+193 101
+173 166
+151 199
+145 221
+142 250
+135 269
+114 281
+92 274
+79 238
+92 205
+128 156
+144 124
+159 95
+168 86
+188 79
+193 83
+193 101

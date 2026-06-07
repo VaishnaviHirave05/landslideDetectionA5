@@ -1,0 +1,21 @@
+landslide instance name: zdf001
+landslide instance polygon boundary coordinates(x,y):
+163 86
+169 98
+167 112
+158 134
+161 151
+172 170
+170 196
+161 216
+146 224
+120 224
+93 201
+79 169
+80 148
+95 121
+114 100
+127 85
+150 79
+160 80
+163 86

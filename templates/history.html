@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan History | LandslideGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===============================
+   VARIABLES
+================================ */
+:root {
+    --primary: #6a5cff;
+    --secondary: #22d3ee;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-main: #ffffff;
+    --text-secondary: rgba(255,255,255,0.7);
+    --danger: #ef4444;
+    --success: #10b981;
+}
+
+/* ===============================
+   PAGE BASE
+================================ */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", system-ui, sans-serif;
+    color: var(--text-main);
+    background: linear-gradient(135deg, #020617, #0f172a);
+    overflow-x: hidden;
+}
+
+/* ===============================
+   BLURRED BACKGROUND
+================================ */
+.bg-blur {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+}
+
+.bg-blur::before,
+.bg-blur::after {
+    content: "";
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(100px);
+    opacity: 0.45;
+}
+
+.bg-blur::before {
+    background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+    top: -150px;
+    left: -150px;
+}
+
+.bg-blur::after {
+    background-image: url("https://images.unsplash.com/photo-1581092334904-5b8e7c6a5c39");
+    bottom: -200px;
+    right: -150px;
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* ===============================
+   GLASS CARD
+================================ */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+/* ===============================
+   HEADING
+================================ */
+h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.history-table thead {
+    background: rgba(255,255,255,0.15);
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.9rem;
+    text-align: center;
+}
+
+.history-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.3s ease;
+}
+
+.history-table tbody tr:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ===============================
+   IMAGE CONTAINER
+================================ */
+.history-img-container {
+    width: 90px;
+    height: 70px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: auto;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.25);
+}
+
+.history-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Hover Zoom + Glow */
+.history-img-container:hover img {
+    transform: scale(1.2);
+    filter: brightness(1.15);
+}
+
+/* ===============================
+   STATUS BADGE
+================================ */
+.status-badge {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.status-danger {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.status-success {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+.empty-text {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white;
+    background: rgba(255,255,255,0.08);
+}
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .history-table thead {
+        display: none;
+    }
+
+    .history-table,
+    .history-table tbody,
+    .history-table tr,
+    .history-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .history-table tr {
+        background: rgba(0,0,0,0.25);
+        border-radius: 16px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .history-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+    }
+
+    .history-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-secondary);
+    }
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-brand">
+        <span>⛰️</span> LandslideGuard
+    </a>
+    <ul class="nav-menu">
+        <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
+        <li><a href="{{ url_for('analysis') }}" class="nav-link">New Analysis</a></li>
+        <li><a href="{{ url_for('history') }}" class="nav-link">History</a></li>
+        <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+    </ul>
+</nav>
+<!-- Background Blur -->
+<div class="bg-blur"></div>
+
+<div class="container">
+    <div class="glass-card">
+        <h2>Scan History</h2>
+
+        {% if history_items %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Original</th>
+                    <th>Result Image</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history_items %}
+                <tr>
+                    <td data-label="Date">{{ item.prediction_date }}</td>
+
+                    <td data-label="Original">
+                        <div class="history-img-container">
+                            <a href="{{ url_for('static', filename=item.original_image) }}" target="_blank">
+                                <img src="{{ url_for('static', filename=item.original_image) }}">
+                            </a>
+                        </div>
+                    </td>
+
+                    <td data-label="Result Image">
+                        <div class="history-img-container">
+                            {% if item.overlay_image %}
+                                <a href="{{ url_for('static', filename=item.overlay_image) }}" target="_blank">
+                                    <img src="{{ url_for('static', filename=item.overlay_image) }}">
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('static', filename=item.original_image) }}" target="_blank">
+                                    <img src="{{ url_for('static', filename=item.original_image) }}">
+                                </a>
+                            {% endif %}
+                        </div>
+                    </td>
+
+                    <td data-label="Prediction">
+                        <span class="status-badge {{ 'status-danger' if 'Landslide' in item.result else 'status-success' }}">
+                            {{ item.result }}
+                        </span>
+                    </td>
+
+                    <td data-label="Confidence">{{ item.confidence }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="empty-text">No history available yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

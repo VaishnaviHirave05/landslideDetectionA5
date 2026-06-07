@@ -1,0 +1,16 @@
+landslide instance name: qxg002
+landslide instance polygon boundary coordinates(x,y):
+141 139
+113 130
+95 121
+86 112
+79 98
+79 89
+84 81
+94 79
+114 80
+136 92
+145 98
+156 113
+154 126
+141 139

@@ -1,0 +1,25 @@
+landslide instance name: df002
+landslide instance polygon boundary coordinates(x,y):
+28 59
+26 54
+26 48
+27 44
+30 38
+39 29
+44 27
+49 27
+55 36
+60 39
+68 37
+78 33
+87 26
+92 28
+93 35
+92 42
+82 52
+79 54
+65 64
+56 66
+48 66
+33 62
+28 59

@@ -1,0 +1,20 @@
+landslide instance name: js035
+landslide instance polygon boundary coordinates(x,y):
+139 88
+156 79
+172 81
+187 102
+198 133
+205 163
+205 187
+186 184
+161 182
+139 170
+112 161
+90 150
+79 139
+79 126
+94 112
+104 97
+120 89
+139 88

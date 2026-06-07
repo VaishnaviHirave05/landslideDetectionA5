@@ -1,0 +1,18 @@
+landslide instance name: zj102
+landslide instance polygon boundary coordinates(x,y):
+84 106
+90 92
+102 82
+115 79
+129 80
+147 96
+160 124
+154 144
+150 156
+139 172
+122 182
+106 178
+90 167
+82 155
+79 141
+84 106

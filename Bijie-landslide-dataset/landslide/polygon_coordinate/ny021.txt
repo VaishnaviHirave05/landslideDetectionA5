@@ -1,0 +1,21 @@
+landslide instance name: ny021
+landslide instance polygon boundary coordinates(x,y):
+79 88
+81 83
+85 79
+92 80
+110 88
+131 96
+156 102
+180 104
+192 109
+200 122
+199 138
+189 151
+163 167
+144 171
+122 165
+100 153
+95 127
+92 114
+79 88

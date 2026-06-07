@@ -1,0 +1,25 @@
+landslide instance name: qx152
+landslide instance polygon boundary coordinates(x,y):
+86 95
+82 92
+81 90
+80 87
+79 85
+79 81
+82 79
+84 79
+87 80
+91 81
+93 80
+97 80
+99 79
+100 80
+100 82
+99 83
+97 86
+95 88
+93 91
+91 93
+90 94
+88 96
+86 95
