@@ -36,18 +36,19 @@ LABELS_PATH = "labels.txt"
 np.set_printoptions(suppress=True)
 
 # -------------------- DATABASE --------------------
+
 def get_db_connection():
     try:
         return mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="landslide_db"
+            host=os.getenv("MYSQLHOST"),
+            user=os.getenv("MYSQLUSER", "root"),
+            password=os.getenv("MYSQLPASSWORD"),
+            database=os.getenv("MYSQLDATABASE"),
+            port=int(os.getenv("MYSQLPORT", 3306))
         )
     except mysql.connector.Error as err:
         print("DB Error:", err)
         return None
-
 # -------------------- LOAD MODEL --------------------
 try:
     model = load_model(MODEL_PATH, compile=False, **CUSTOM_LOAD_KWARGS)
